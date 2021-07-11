@@ -21,6 +21,21 @@ app.get('/Task', async function (req, res) {
     });
 });
 
+app.put('/Task/:id', async function (req, res) {
+    const id = req.params["id"];
+    const payload = req.body;
+    await Task.findByIdAndUpdate({ _id: id }, payload, { new: true }, function (err, task) {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                message: 'No se pudo actualizar la tarea',
+                error: err
+            });
+        }
+        res.status(200).send(task);
+    });
+});
+
 app.get('/State', async function (req, res) {
     await State.find({}, function (err, docs) {
         res.status(200).json({

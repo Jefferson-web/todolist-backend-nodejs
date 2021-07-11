@@ -3,7 +3,8 @@ const { MONGO_URI } = require('../config');
 
 const options = {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: true
 }
 
 function connectDb() {
