@@ -3,6 +3,7 @@ const connectDb = require('./db/connection');
 const { PORT } = require('./config')
 const Task = require('./schemas/Task');
 const State = require('./schemas/State');
+const cors = require('cors');
 const app = express();
 
 connectDb();
@@ -10,6 +11,7 @@ connectDb();
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 // Routes
 app.get('/Task', async function (req, res) {
     await Task.find({}, function (err, docs) {
