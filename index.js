@@ -21,6 +21,17 @@ app.get('/Task', async function (req, res) {
     });
 });
 
+app.post('/Task', async function (req, res) {
+    const { description, state } = req.body;
+    let task = new Task({
+        description,
+        state
+    })
+    task.save(function (err, doc) {
+        res.status(201).send(doc);
+    });
+});
+
 app.put('/Task/:id', async function (req, res) {
     const id = req.params["id"];
     const payload = req.body;
